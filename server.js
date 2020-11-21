@@ -10,6 +10,12 @@ const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
 
+// route to the homepage
+app.get('/', (req, res) => {
+  console.log('test')
+  res.send('Hello from home page')
+});
+
 app.listen(PORT, () => {
   console.log(`Server is listening on port: ${PORT}`)
 })
