@@ -1,5 +1,7 @@
 import db from '../db.js'
 import validator from 'validator'
+import bcrypt from 'bcryptjs'
+import md5 from 'md5'
 
 let Admin = function (data) {
   this.data = data
@@ -17,6 +19,7 @@ Admin.prototype.cleanUp = function () {
     email: this.data.email.trim().toLowerCase(),
     password: this.data.password
   }
+
 }
 
 
@@ -30,11 +33,23 @@ Admin.prototype.validate = function () {
     if (this.data.password.length > 50) { this.errors.push("Password cannot exceed 50 characters.") }
     if (this.data.username.length > 0 && this.data.username.length < 3) { this.errors.push("Username must be at least 3 characters.") }
     if (this.data.username.length > 30) { this.errors.push("Username cannot exceed 30 characters.") }
+
+    // only if username is valid, then check to see if it's already taken
+    if (this.data.username.length > 2 && this.data.username.length < 31 && validator.isAlphanumeric(this.data.username)) {
+      let usernameExists = await db.db().collection('admins').findOne({ username: this.data.username })
+      if (usernameExists) { this.errors.push("That username is already taken") }
+    }
+
+    // only if email is valid, then check to see if it's already taken
+    if (validator.isEmail(this.data.email)) {
+      let emailExists = await db.db().collection('admins').findOne({ email: this.data.email })
+      if (emailExists) { this.errors.push("That email is already being used") }
+    }
     resolve()
   })
 }
 
-Admin.prototype.addAdmin = function (admin) {
+Admin.prototype.addAdmin = function () {
   return new Promise(async (resolve, reject) => {
     // Step #1: clean up & validate user data
     this.cleanUp()
@@ -42,7 +57,9 @@ Admin.prototype.addAdmin = function (admin) {
     // Step #2: Only if there are no validation errors
     // then add the admin data into a database
     if (!this.errors.length) {
-      const insertRes = await db.db().collection('admins').insertOne(admin);
+      let salt = bcrypt.genSaltSync(10)
+      this.data.password = bcrypt.hashSync(this.data.password, salt)
+      const insertRes = await db.db().collection('admins').insertOne(this.data);
       resolve()
     }
     else {
@@ -51,18 +68,25 @@ Admin.prototype.addAdmin = function (admin) {
   })
 }
 
-// Admin.prototype.addAdmin = function (admin) {
-//   return new Promise(async (resolve, reject) => {
-//     try {
-//       const insertRes = await db.db().collection('admins').insertOne(admin);
-//       return insertRes;
-//       resolve()
-//     } catch (error) {
-//       console.error(error);
-//       reject()
-//     }
-//   })
-// };
+Admin.prototype.login = function (admin) {
+  return new Promise(async (resolve, reject) => {
+    this.cleanUp()
+    if (!this.errors.length) {
+      const insertRes = await db.db().collection('admins').findOne({ username: this.data.username })
+        .then((admin) => {
+          if (admin && this.data.password === admin.password) {
+            this.data = admin
+            resolve()
+          } else {
+            reject('Invaild username and password')
+          }
+        })
+        .catch(() => {
+          reject('Developer Error')
+        })
+    }
+  })
+}
 
 
 

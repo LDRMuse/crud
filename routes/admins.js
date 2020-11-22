@@ -1,7 +1,7 @@
 // all routes in here are starting with /admins
 
 import express from 'express'
-import createAdmin from '../controllers/adminsController.js'
+import AdminController from '../controllers/adminsController.js'
 const router = express.Router();
 
 
@@ -10,8 +10,8 @@ router.get('/', (req, res) => {
 })
 
 // localhost:3000/admins/register
-router.post('/register', createAdmin);
-
+router.post('/register', AdminController.createAdmin);
+router.post('/login', AdminController.login);
 
 
 export default router;
