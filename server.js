@@ -1,4 +1,5 @@
 import express from 'express';
+import session from 'express-session'
 
 // allows us to take in incoming post request body
 import bodyParser from 'body-parser'
@@ -11,6 +12,15 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
+
+let sessionOptions = session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true}
+})
+
+app.use(sessionOptions)
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

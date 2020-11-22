@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 // localhost:3000/admins/register
 router.post('/register', AdminController.createAdmin);
 router.post('/login', AdminController.login);
+router.post('/login', AdminController.logout);
 
 
 export default router;
