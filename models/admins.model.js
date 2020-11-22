@@ -68,25 +68,50 @@ Admin.prototype.addAdmin = function () {
   })
 }
 
-Admin.prototype.login = function (admin) {
+Admin.prototype.login = function () {
+  //used an arrow function because "this" will tie to the Promise() rather than tieing to the global function
   return new Promise(async (resolve, reject) => {
+    // call cleanUp() to make sure were sending the properties in a string
     this.cleanUp()
-    if (!this.errors.length) {
-      const insertRes = await db.db().collection('admins').findOne({ username: this.data.username })
-        .then((admin) => {
-          if (admin && this.data.password === admin.password) {
-            this.data = admin
-            resolve()
-          } else {
-            reject('Invaild username and password')
-          }
-        })
-        .catch(() => {
-          reject('Developer Error')
-        })
-    }
+    // if user, go into the db, find the username that matches the user input (this.data.username)
+    const mongoRes = await db.db().collection('admins').findOne({ username: this.data.username })
+      .then((admin) => {
+        // if this is an admin, && user's input password matches the hashed password, send 'congrats' result
+        if (admin && bcrypt.compareSync(this.data.password, admin.password)) {
+          this.data = admin
+          resolve('congrats')
+        }
+        // else, send 'Invalid username/password' err
+        else {
+          reject('Invalid username/password')
+        }
+      })
+      .catch(() => {
+        // this is an error on our side as a developer
+        reject('Please try again later')
+      })
   })
 }
+
+// Admin.prototype.login = function (admin) {
+//   return new Promise(async (resolve, reject) => {
+//     this.cleanUp()
+//     if (!this.errors.length) {
+//       const insertRes = await db.db().collection('admins').findOne({ username: this.data.username })
+//         .then((admin) => {
+//           if (admin && this.data.password === admin.password) {
+//             this.data = admin
+//             resolve()
+//           } else {
+//             reject('Invaild username and password')
+//           }
+//         })
+//         .catch(() => {
+//           reject('Developer Error')
+//         })
+//     }
+//   })
+// }
 
 
 

@@ -15,19 +15,19 @@ const createAdmin = function (req, res) {
     })
 }
 
-
 const login = function (req, res) {
   let admin = new Admin(req.body)
-  admin.login(admin)
-  .then((admin) => {
-res.send('yay')
-  }).catch((err) => {
-    res.status(500);
-    res.json(err)
-  })
+  admin.login()
+    .then(function (result) {
+      console.log(result)
+      res.send('yay')
+    }).catch((err) => {
+      res.status(500);
+      res.json(err)
+    })
 }
 
-const adminController = {createAdmin, login}
+const adminController = { createAdmin, login }
 
 export default adminController;
 
