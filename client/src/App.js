@@ -10,25 +10,25 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route path='admin/register' component={Login} />
-        <Route path='admin/logout' component={Login} />
+        <Route path='admins/register' component={Login} />
+        <Route path='admins/logout' component={Login} />
 
-        <Route exact path="/admin/login">
+        <Route exact path="/admins/login">
           <Login />
         </Route>
 
-        <Route exact path="/admin/register">
+        <Route exact path="/admins/register">
           <Login />
         </Route>
 
-        <Route exact path="/admin/FAQ">
+        <Route exact path="/admins/FAQ">
           <FAQ />
         </Route>
 
-        <Route path='admin/FAQ/:id' component={FAQ} />
-        <Route path='admin/FAQ/create-FAQ' component={FAQ} />
-        <Route path='admin/FAQ/:id/edit-FAQ' component={FAQ} />
-        <Route path='admin/FAQ/:id/delete-FAQ' component={FAQ} />
+        <Route path='admins/FAQ/:id' component={FAQ} />
+        <Route path='admins/FAQ/create-FAQ' component={FAQ} />
+        <Route path='admins/FAQ/:id/edit-FAQ' component={FAQ} />
+        <Route path='admins/FAQ/:id/delete-FAQ' component={FAQ} />
       </Switch>
     </div>
   );

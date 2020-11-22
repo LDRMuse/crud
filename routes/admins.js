@@ -1,28 +1,17 @@
 // all routes in here are starting with /admins
 
 import express from 'express'
-
+import createAdmin from '../controllers/adminsController.js'
 const router = express.Router();
 
-const admins = [
-  {
-    firstName: "john",
-    lastName: "Doe",
-    age: "25"
-  }
-]
 
 router.get('/', (req, res) => {
   res.send(admins)
 })
 
-router.post('/', (req, res) => {
-const admin = req.body;
+// localhost:3000/admins/register
+router.post('/register', createAdmin);
 
 
-admins.push(admin)
-
-res.send(`Admin with the first name ${admin.firstName} has been created`)
-})
 
 export default router;
