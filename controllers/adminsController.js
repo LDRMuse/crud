@@ -3,11 +3,10 @@ import Admin from '../models/admins.model.js'
 
 const createAdmin = function (req, res) {
   let admin = new Admin(req.body)
-  admin.addAdmin()
-    .then(() => {
-
+  admin.addAdmin(admin)
+    .then((mongoRes) => {
       res.status(201);
-      res.json();
+      res.json(mongoRes);
     }).catch((err) => {
       res.status(500);
       res.json(err);
