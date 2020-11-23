@@ -1,5 +1,7 @@
 import express from 'express';
 import session from 'express-session'
+import connectMongo from 'connect-mongo';
+import db from './db.js'
 
 // allows us to take in incoming post request body
 import bodyParser from 'body-parser'
@@ -12,9 +14,11 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
+const MongoStore = connectMongo(session);
 
 let sessionOptions = session({
   secret: process.env.SECRET,
+  store: new MongoStore({client: db}),
   resave: false,
   saveUninitialized: false,
   cookie: {maxAge: 1000 * 60 * 60 * 24, httpOnly: true}
