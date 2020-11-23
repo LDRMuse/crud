@@ -27,10 +27,10 @@ export const Navbar = () => {
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <Link to='/admin/register' class="button is-primary">
+          <Link to='/admins/register' class="button is-primary">
             <strong>Want to be an Admin?</strong>
           </Link>
-          <Link to='/admin/login' class="button is-light">
+          <Link to='/admins/login' class="button is-light">
             Log in
           </Link>
         </div>
