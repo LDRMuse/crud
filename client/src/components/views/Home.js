@@ -35,7 +35,7 @@ export const Home = () => {
                 <div className="content article-body">
                   <p className="has-text-centered"> Want to visit our FAQ page?</p>
                   <div className="has-text-centered mb-4 tags has-addons level-item">
-                    <Link to='/admins/FAQ' className="button is-primary is-small mt-3">Go to FAQs</Link>
+                    <Link to='/admin/FAQ' className="button is-primary is-small mt-3">Go to FAQs</Link>
                   </div>
                   <hr></hr>
                   <p>

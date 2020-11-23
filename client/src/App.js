@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 import './App.scss';
 
-import { Navbar, Home, Login, FAQ, Register } from './components'
+import { Navbar, Home, Login, FAQ } from './components'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         </Route>
 
         <Route exact path="/admins/register">
-          <Register />
+          <Login />
         </Route>
 
         <Route exact path="/admins/FAQ">
