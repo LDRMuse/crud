@@ -1,1 +1,1 @@
-export { Home, Login, Navbar, FAQ } from './views'
+export { Home, Login, Navbar, FAQ, Register } from './views'
