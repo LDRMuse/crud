@@ -2,6 +2,7 @@ import express from 'express';
 import session from 'express-session'
 import connectMongo from 'connect-mongo';
 import db from './db.js'
+import cors from 'cors'
 
 // allows us to take in incoming post request body
 import bodyParser from 'body-parser'
@@ -25,9 +26,10 @@ let sessionOptions = session({
 })
 
 app.use(sessionOptions)
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(cors())
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+app.use(express.json())
 
 // tell express to use the admins routes
 // set the starting path for all the routes in the admins.js

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import dotenv from "dotenv";
 import axios from 'axios'
-dotenv.config();
+import dotenv from "dotenv";
+dotenv.config()
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -26,92 +26,96 @@ export const Register = () => {
     })
   }
 
-//   const registerAdmin = async (admin) => {
-//     const res = await fetch(`${baseUrl}/admins/register`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(admin),
-//   })
-//   console.log(res)
-// }
+  // useEffect(() => {
+  //   registerAdmin(admin)
+  // }, [])
 
-const sendRequest = () => {
-  axios({
-    method  : 'POST',
-    url : `${baseUrl}/admins/register`,
-    data : admin,
-  })
-  .then((res)=>{
-    console.log(res);
-  })
-}
+
+
+  const sendRequest = async (admin) => {
+    const res = await fetch(`${baseUrl}/admins/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(admin)
+    })
+    return await res.json()
+  }
+
+
+  // const sendRequest = (admin) => {
+  //   axios.post(`${baseUrl}/admins/register`, admin)
+  //   .then(() => console.log('admin made'))
+  //   .catch((err) => {
+  //     console.log(err)
+  //   })
+  // }
 
   // once admin is set, pass that data when submitted
-  const handleSubmit = (e) => {
-        e.preventDefault()
-        // call API function to send admin data to backend
-        sendRequest()
-        // after admin is sent to the backend, reset state
-        setAdmin({
-          username: '',
-          email: '',
-          password: ''
-        })
-      }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    // call API function to send admin data to backend
+    sendRequest(admin)
+    // after admin is sent to the backend, reset state
+    setAdmin({
+      username: '',
+      email: '',
+      password: ''
+    })
+  }
 
 
   return (
-      <>
-        <form onSubmit={handleSubmit}>
-          <section className="hero is-primary is-fullheight">
-            <div className="hero-body">
-              <div className="container">
-                <div className="columns is-centered">
-                  <div className="column is-5-tablet is-4-desktop is-3-widescreen">
-                    <form action="" className="box">
+    <>
+      <form onSubmit={handleSubmit}>
+        <section className="hero is-primary is-fullheight">
+          <div className="hero-body">
+            <div className="container">
+              <div className="columns is-centered">
+                <div className="column is-5-tablet is-4-desktop is-3-widescreen">
+                  <form action="" className="box">
                     <h1 className="has-text-centered">Register Form</h1>
-                      <div className="field">
-                        <label htmlFor="" className="label">Username</label>
-                        <div className="control has-icons-left">
-                          <input type="text" value={username} name="username" onChange={handleChange} placeholder="username" className="input" required />
-                          <span className="icon is-small is-left">
-                            <i className="fa fa-envelope"></i>
-                          </span>
-                        </div>
+                    <div className="field">
+                      <label htmlFor="" className="label">Username</label>
+                      <div className="control has-icons-left">
+                        <input type="text" value={username} name="username" onChange={handleChange} placeholder="username" className="input" required />
+                        <span className="icon is-small is-left">
+                          <i className="fa fa-envelope"></i>
+                        </span>
                       </div>
-                      <div className="field">
-                        <label htmlFor="" className="label">Email</label>
-                        <div className="control has-icons-left">
-                          <input type="email" value={email} name="email" onChange={handleChange} placeholder="e.g. bobsmith@gmail.com" className="input" required />
-                          <span className="icon is-small is-left">
-                            <i className="fa fa-envelope"></i>
-                          </span>
-                        </div>
+                    </div>
+                    <div className="field">
+                      <label htmlFor="" className="label">Email</label>
+                      <div className="control has-icons-left">
+                        <input type="email" value={email} name="email" onChange={handleChange} placeholder="e.g. bobsmith@gmail.com" className="input" required />
+                        <span className="icon is-small is-left">
+                          <i className="fa fa-envelope"></i>
+                        </span>
                       </div>
-                      <div className="field">
-                        <label htmlFor="" className="label">Password</label>
-                        <div className="control has-icons-left">
-                          <input type="password" value={password} name="password"
-                            onChange={handleChange} placeholder="*******" className="input" required />
-                          <span className="icon is-small is-left">
-                            <i className="fa fa-lock"></i>
-                          </span>
-                        </div>
+                    </div>
+                    <div className="field">
+                      <label htmlFor="" className="label">Password</label>
+                      <div className="control has-icons-left">
+                        <input type="password" value={password} name="password"
+                          onChange={handleChange} placeholder="*******" className="input" required />
+                        <span className="icon is-small is-left">
+                          <i className="fa fa-lock"></i>
+                        </span>
                       </div>
-                      <div className="field">
-                        <Link to='/' type="submit" className="button is-success">
-                          Register
+                    </div>
+                    <div className="field">
+                      <Link to='/' type="submit" className="button is-success">
+                        Register
                 </Link>
-                      </div>
-                    </form>
-                  </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
-          </section>
-        </form>
-      </>
-    )
-  }
+          </div>
+        </section>
+      </form>
+    </>
+  )
+}

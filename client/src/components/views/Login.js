@@ -24,20 +24,12 @@ export const Login = () => {
     })
   }
 
-  const registerAdmin = async () => {
-    const res = await fetch(`${baseUrl}/admins/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(),
-  })}
 
   // once admin is set, pass that data when submitted
   const handleSubmit = (e) => {
         e.preventDefault()
-        // call API function to send admin data to backend
-        registerAdmin()
+        // call API function to send admin data to backend & login
+
         // after admin is sent to the backend, reset state
         setAdmin({
           username: '',
