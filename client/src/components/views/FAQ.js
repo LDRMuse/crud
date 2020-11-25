@@ -23,41 +23,41 @@ export const FAQ = () => {
         </div>
       </section>
 <div className='mt-6 container has-text-centered"'>
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Question Title</label>
+      <div className="field is-horizontal">
+        <div className="field-label is-normal">
+          <label className="label">Question Title</label>
         </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input class="input is-danger" type="text" placeholder="e.g. Partnership opportunity" />
+        <div className="field-body">
+          <div className="field">
+            <div className="control">
+              <input className="input is-danger" type="text" placeholder="e.g. Partnership opportunity" />
             </div>
 
           </div>
         </div>
       </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Answer</label>
+      <div className="field is-horizontal">
+        <div className="field-label is-normal">
+          <label className="label">Answer</label>
         </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <textarea class="textarea" placeholder="Explain how we can help you"></textarea>
+        <div className="field-body">
+          <div className="field">
+            <div className="control">
+              <textarea className="textarea" placeholder="Explain how we can help you"></textarea>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="field is-horizontal">
-        <div class="field-label">
+      <div className="field is-horizontal">
+        <div className="field-label">
 
         </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <button class="button is-primary">
+        <div className="field-body">
+          <div className="field">
+            <div className="control">
+              <button className="button is-primary">
                 Add
         </button>
             </div>
