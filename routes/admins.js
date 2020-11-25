@@ -5,9 +5,10 @@ import AdminController from '../controllers/adminsController.js'
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
-  res.send(admins)
+router.get('/register', (req, res) => {
+  res.send('hi')
 })
+
 
 // localhost:3000/admins/register
 router.post('/register', AdminController.createAdmin);

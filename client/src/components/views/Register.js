@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import dotenv from "dotenv";
+
 dotenv.config()
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
-
+const baseUrl = `http://localhost:5000`;
 
 export const Register = () => {
   const [admin, setAdmin] = useState({
@@ -27,36 +27,35 @@ export const Register = () => {
     console.log(admin, 'hiiii')
   }
 
+
   // useEffect(() => {
-  //   registerAdmin(admin)
-  // }, [])
+  //   sendRequest()
+  // })
 
-  const sendRequest = () => {
-    const create = async (payload) => {
-      const res = await fetch(`${baseUrl}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-      console.log(res)
-    }
-    create(admin)
-}
-
-  // const sendRequest = async (admin) => {
-  //   const res = await fetch(`${baseUrl}/`, {
+  // const sendRequest = async () => {
+  //   const requestOptions = {
   //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
+  //     headers: { 'Content-Type': 'application/json' },
   //     body: JSON.stringify(admin)
-  //   })
-  //   console.log(res, 'what is this')
+  //   };
+  //   const response = await fetch(`${baseUrl}/admins/register`, requestOptions);
+  //   // const data = await response.json();
+  //   console.log(response, 'response')
   // }
 
-
+    const sendRequest = (endpoint) => {
+      const create = async (payload) => {
+        const res = await fetch(`${baseUrl}/admins${endpoint}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+        console.log(res)
+      }
+      create(admin)
+  }
 
   // const sendRequest = (admin) => {
   //   axios.post(`${baseUrl}/admins/register`, admin)
@@ -70,7 +69,7 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     // call API function to send admin data to backend
-    await sendRequest()
+    sendRequest('/register')
     // after admin is sent to the backend, reset state
     setAdmin({
       username: '',
