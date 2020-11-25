@@ -93,27 +93,6 @@ Admin.prototype.login = function () {
   })
 }
 
-// Admin.prototype.login = function (admin) {
-//   return new Promise(async (resolve, reject) => {
-//     this.cleanUp()
-//     if (!this.errors.length) {
-//       const insertRes = await db.db().collection('admins').findOne({ username: this.data.username })
-//         .then((admin) => {
-//           if (admin && this.data.password === admin.password) {
-//             this.data = admin
-//             resolve()
-//           } else {
-//             reject('Invaild username and password')
-//           }
-//         })
-//         .catch(() => {
-//           reject('Developer Error')
-//         })
-//     }
-//   })
-// }
-
-
 
 // export const getAdmin = async (uid) => {
 //   try {

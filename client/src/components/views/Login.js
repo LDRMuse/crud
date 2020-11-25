@@ -46,7 +46,7 @@ export const Login = () => {
               <div className="container">
                 <div className="columns is-centered">
                   <div className="column is-5-tablet is-4-desktop is-3-widescreen">
-                    <form action="" className="box">
+                    <div className="box">
                     <h1 className="has-text-centered">Login Form</h1>
                       <div className="field">
                         <label htmlFor="" className="label">Username</label>
@@ -72,7 +72,7 @@ export const Login = () => {
                           Login
                 </Link>
                       </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </div>

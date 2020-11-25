@@ -24,24 +24,38 @@ export const Register = () => {
       ...admin,
       [e.target.name]: e.target.value
     })
+    console.log(admin, 'hiiii')
   }
 
   // useEffect(() => {
   //   registerAdmin(admin)
   // }, [])
 
+  const sendRequest = () => {
+    const create = async (payload) => {
+      const res = await fetch(`${baseUrl}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      console.log(res)
+    }
+    create(admin)
+}
 
+  // const sendRequest = async (admin) => {
+  //   const res = await fetch(`${baseUrl}/`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(admin)
+  //   })
+  //   console.log(res, 'what is this')
+  // }
 
-  const sendRequest = async (admin) => {
-    const res = await fetch(`${baseUrl}/admins/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(admin)
-    })
-    return await res.json()
-  }
 
 
   // const sendRequest = (admin) => {
@@ -56,7 +70,7 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     // call API function to send admin data to backend
-    sendRequest(admin)
+    await sendRequest()
     // after admin is sent to the backend, reset state
     setAdmin({
       username: '',
@@ -74,7 +88,7 @@ export const Register = () => {
             <div className="container">
               <div className="columns is-centered">
                 <div className="column is-5-tablet is-4-desktop is-3-widescreen">
-                  <form action="" className="box">
+                  <div className="box">
                     <h1 className="has-text-centered">Register Form</h1>
                     <div className="field">
                       <label htmlFor="" className="label">Username</label>
@@ -105,11 +119,12 @@ export const Register = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <Link to='/' type="submit" className="button is-success">
+                      <button> click </button>
+                      {/* <Link to='/' type="submit" className="button is-success">
                         Register
-                </Link>
+                </Link> */}
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
