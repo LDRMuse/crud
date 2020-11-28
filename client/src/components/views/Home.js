@@ -45,22 +45,20 @@ export const Home = () => (
                     Go to FAQs
                   </Link>
                 </div>
-                <hr></hr>
+                <p className="mb-3">
+                  Non arcu risus quis varius quam quisque. Dictum varius duis at
+                  consectetur lorem. Posuere sollicitudin aliquam ultrices
+                  sagittis orci a scelerisque purus semper.{" "}
+                </p>
+                <p className="mb-3">
+                  Metus aliquam eleifend mi in nulla posuere sollicitudin
+                  aliquam ultrices. In hac habitasse platea dictumst vestibulum
+                  rhoncus est pellentesque elit. Accumsan lacus vel facilisis
+                  volutpat. Non sodales neque sodales ut etiam. Est pellentesque
+                  elit ullamcorper dignissim cras tincidunt lobortis feugiat
+                  vivamus.
+                </p>
                 <p>
-                  <p>
-                    Non arcu risus quis varius quam quisque. Dictum varius duis
-                    at consectetur lorem. Posuere sollicitudin aliquam ultrices
-                    sagittis orci a scelerisque purus semper.{" "}
-                  </p>
-                  <p>
-                    Metus aliquam eleifend mi in nulla posuere sollicitudin
-                    aliquam ultrices. In hac habitasse platea dictumst
-                    vestibulum rhoncus est pellentesque elit. Accumsan lacus vel
-                    facilisis volutpat. Non sodales neque sodales ut etiam. Est
-                    pellentesque elit ullamcorper dignissim cras tincidunt
-                    lobortis feugiat vivamus.
-                  </p>
-                  <hr></hr>
                   Voluptat ut farmacium tellus in metus vulputate. Feugiat in
                   fermentum posuere urna nec. Pharetra convallis posuere morbi
                   leo urna molestie. Accumsan lacus vel facilisis volutpat est
