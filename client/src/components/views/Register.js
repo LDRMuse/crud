@@ -118,7 +118,7 @@ export const Register = () => {
                       </div>
                     </div>
                     <div className="field">
-                      <button> click </button>
+                    <button type='submit' className='button'> Register </button>
                       {/* <Link to='/' type="submit" className="button is-success">
                         Register
                 </Link> */}

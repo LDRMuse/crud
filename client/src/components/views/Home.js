@@ -23,16 +23,12 @@ export const Home = () => (
                 <div className="media-content has-text-centered">
                   <p className="title article-title">Welcome Guests!</p>
                   <div className="has-text-centered mb-4 tags has-addons level-item">
-<<<<<<< HEAD
-                    <Link to='/admins/FAQ' className="button is-primary is-small mt-3">Go to FAQs</Link>
-=======
                     <span className="tag is-rounded is-info">
                       @melissaheying{" "}
                     </span>
                     <span className="tag is-rounded">
                       Est. November 13, 2020
                     </span>
->>>>>>> 69971f72f34887b60652fdea928612717c3a0b5c
                   </div>
                 </div>
               </div>
@@ -43,7 +39,7 @@ export const Home = () => (
                 </p>
                 <div className="has-text-centered mb-4 tags has-addons level-item">
                   <Link
-                    to="/admin/FAQ"
+                    to="/admins/FAQ"
                     className="button is-primary is-small mt-3"
                   >
                     Go to FAQs
