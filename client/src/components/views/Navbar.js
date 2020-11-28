@@ -24,13 +24,13 @@ export const Navbar = () => (
           </Link>
         </div>
 
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <Link to="/admins/register" class="button is-primary">
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <div className="buttons">
+              <Link to="/admins/register" className="button is-primary">
                 <strong>Want to be an Admin?</strong>
               </Link>
-              <Link to="/admins/login" class="button is-light">
+              <Link to="/admins/login" className="button is-light">
                 Log in
               </Link>
             </div>
