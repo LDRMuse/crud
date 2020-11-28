@@ -3,8 +3,7 @@ import session from 'express-session'
 import connectMongo from 'connect-mongo';
 import db from './db.js'
 import cors from 'cors'
-// allows us to take in incoming post request body
-import bodyParser from 'body-parser'
+
 import dotenv from 'dotenv';
 // bring in the admins routes
 import adminsRoutes from './routes/admins.js'
