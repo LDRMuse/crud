@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import dotenv from "dotenv";
+import api from '../../api/routes'
 
-dotenv.config();
-
-const baseUrl = `http://localhost:5000`;
+const adminApi = api('/register')
 
 export const Register = () => {
   const [admin, setAdmin] = useState({
@@ -22,28 +20,14 @@ export const Register = () => {
       ...admin,
       [e.target.name]: e.target.value,
     });
-    console.log(admin, "hiiii");
   };
 
-  const sendRequest = (endpoint) => {
-    const create = async (payload) => {
-      const res = await fetch(`${baseUrl}/admins${endpoint}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      console.log(res);
-    };
-    create(admin);
-  };
 
   // once admin is set, pass that data when submitted
   const handleSubmit = async (e) => {
     e.preventDefault();
     // call API function to send admin data to backend
-    sendRequest("/register");
+    adminApi.create(admin)
     // after admin is sent to the backend, reset state
     setAdmin({
       username: "",
