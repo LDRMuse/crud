@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
   res.send("Success!");
 });
 
-// localhost:3000/admins/register
+// localhost:3000/admins
 router.post("/register", AdminController.createAdmin);
 router.post("/login", AdminController.login);
 router.post('/login', AdminController.logout);
