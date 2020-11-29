@@ -1,9 +1,4 @@
-import dotenv from "dotenv";
-dotenv.config();
-
-const baseUrl = `http://localhost:5000`;
-//TODO: Figure out why .env doesnt work
-// const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 // Factory Function
 const api = (endpoint) => ({
