@@ -1,7 +1,6 @@
 import db from '../db.js'
 import validator from 'validator'
 import bcrypt from 'bcryptjs'
-import md5 from 'md5'
 
 let Admin = function (data) {
   this.data = data
@@ -19,12 +18,10 @@ Admin.prototype.cleanUp = function () {
     email: this.data.email.trim().toLowerCase(),
     password: this.data.password
   }
-
 }
 
-
 Admin.prototype.validate = function () {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve) => {
     if (this.data.username == "") { this.errors.push("You must provide a username.") }
     if (this.data.username != "" && !validator.isAlphanumeric(this.data.username)) { this.errors.push("Username can only contain letters and numbers.") }
     if (!validator.isEmail(this.data.email)) { this.errors.push("You must provide a valid email address.") }
@@ -36,13 +33,13 @@ Admin.prototype.validate = function () {
 
     // only if username is valid, then check to see if it's already taken
     if (this.data.username.length > 2 && this.data.username.length < 31 && validator.isAlphanumeric(this.data.username)) {
-      let usernameExists = await db.db().collection('admins').findOne({ username: this.data.username })
+      let usernameExists =  db.db().collection('admins').findOne({ username: this.data.username })
       if (usernameExists) { this.errors.push("That username is already taken") }
     }
 
     // only if email is valid, then check to see if it's already taken
     if (validator.isEmail(this.data.email)) {
-      let emailExists = await db.db().collection('admins').findOne({ email: this.data.email })
+      let emailExists =  db.db().collection('admins').findOne({ email: this.data.email })
       if (emailExists) { this.errors.push("That email is already being used") }
     }
     resolve()
@@ -50,16 +47,16 @@ Admin.prototype.validate = function () {
 }
 
 Admin.prototype.addAdmin = function () {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     // Step #1: clean up & validate user data
     this.cleanUp()
-    await this.validate()
+    this.validate()
     // Step #2: Only if there are no validation errors
     // then add the admin data into a database
     if (!this.errors.length) {
       let salt = bcrypt.genSaltSync(10)
       this.data.password = bcrypt.hashSync(this.data.password, salt)
-      const insertRes = await db.db().collection('admins').insertOne(this.data);
+      db.db().collection('admins').insertOne(this.data);
       resolve()
     }
     else {
@@ -70,11 +67,11 @@ Admin.prototype.addAdmin = function () {
 
 Admin.prototype.login = function () {
   //used an arrow function because "this" will tie to the Promise() rather than tieing to the global function
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     // call cleanUp() to make sure were sending the properties in a string
     this.cleanUp()
     // if user, go into the db, find the username that matches the user input (this.data.username)
-    const mongoRes = await db.db().collection('admins').findOne({ username: this.data.username })
+    db.db().collection('admins').findOne({ username: this.data.username })
       .then((admin) => {
         // if this is an admin, && user's input password matches the hashed password, send 'congrats' result
         if (admin && bcrypt.compareSync(this.data.password, admin.password)) {
@@ -92,6 +89,7 @@ Admin.prototype.login = function () {
       })
   })
 }
+
 
 
 // export const getAdmin = async (uid) => {

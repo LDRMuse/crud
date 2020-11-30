@@ -1,10 +1,10 @@
 //middleware
-import Admin from '../models/admins.model.js'
+import adminModel from '../models/admins.model.js'
 
 
 const createAdmin = function (req, res) {
   // create a new instance of Admin and call it's function addAdmin
-  let admin = new Admin(req.body)
+  const admin = new adminModel(req.body)
   admin.addAdmin()
     .then((mongoRes) => {
       res.status(201);
@@ -16,7 +16,7 @@ const createAdmin = function (req, res) {
 }
 
 const login = function (req, res) {
-  let admin = new Admin(req.body)
+  const admin = new adminModel(req.body)
   admin.login()
     .then(function (result) {
       // add a session once admin is logged in and add username property
